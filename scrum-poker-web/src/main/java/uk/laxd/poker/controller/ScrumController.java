@@ -5,7 +5,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import uk.laxd.poker.dto.GreetingDto;
 import uk.laxd.poker.dto.UserDto;
 import uk.laxd.poker.dto.VoteDto;
 
