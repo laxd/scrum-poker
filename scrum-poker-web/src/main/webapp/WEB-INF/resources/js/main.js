@@ -21,7 +21,16 @@ function removeUser(user) {
 }
 
 function updateVotes(vote) {
-    $("#votes")
+    if($("#" + vote.name + "-vote").length) {
+        var voteDiv = $("#" + vote.name + "-vote");
+    }
+    else {
+        var voteDiv = $("<div>")
+        voteDiv.attr("id", vote.name + "-vote");
+        $("#votes").append(voteDiv);
+    }
+
+    voteDiv.html("<p>" + vote.name + " voted " + vote.vote + "</p>");
 }
 
 /*
@@ -69,5 +78,10 @@ function disconnect() {
 }
 
 function submitVote() {
-
+    var name = $("#name").val();
+    var vote = $("#vote").val();
+    stomp.send(context + "/vote", {}, JSON.stringify({
+        'name': name,
+        'vote': vote
+    }))
 }

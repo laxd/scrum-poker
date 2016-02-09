@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 
@@ -20,6 +21,18 @@
     <input id="name" type="text"/>
     <button type="button" onclick="submitName();">Submit</button>
 </div>
+
+<select id="vote">
+    <c:forTokens items="0,1,2,3,5,8,13,20,40,100,Infinity" delims="," var="v">
+        <option>${v}</option>
+    </c:forTokens>
+</select>
+<button type="button" onclick="submitVote();">Vote</button>
+
+<div id="votes">
+
+</div>
+
 <p id="response">
 
 </p>

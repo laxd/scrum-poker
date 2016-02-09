@@ -4,15 +4,15 @@ package uk.laxd.poker.dto;
  * Created by lawrence on 08/02/16.
  */
 public class VoteDto {
-    private String userName;
+    private String name;
     private String vote;
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getVote() {
