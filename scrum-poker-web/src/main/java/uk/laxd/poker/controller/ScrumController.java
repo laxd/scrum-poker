@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import uk.laxd.poker.dto.GreetingDto;
 import uk.laxd.poker.dto.UserDto;
+import uk.laxd.poker.dto.VoteDto;
 
 /**
  * Created by lawrence on 06/02/16.
@@ -19,14 +20,21 @@ public class ScrumController {
     }
 
     @MessageMapping("/addUser")
-    @SendTo("/topic/useradded")
-    public GreetingDto addUser(UserDto userDto) {
-        System.out.println("Adding user: " + userDto.getName());
+    @SendTo("/topic/userConnect")
+    public UserDto addUser(UserDto userDto) {
+        return userDto;
+    }
 
-        GreetingDto greetingDto = new GreetingDto();
-        greetingDto.setGreeting(userDto.getName() + " joined!");
+    @MessageMapping("/removeUser")
+    @SendTo("/topic/userDisconnect")
+    public UserDto removeUser(UserDto userDto) {
+        return userDto;
+    }
 
-        return greetingDto;
+    @MessageMapping("/vote")
+    @SendTo("/topic/vote")
+    public VoteDto vote(VoteDto voteDto) {
+        return voteDto;
     }
 
 }

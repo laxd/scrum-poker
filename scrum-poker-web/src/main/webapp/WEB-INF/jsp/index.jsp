@@ -24,5 +24,7 @@
 
 </p>
 
+<button id="disconnect">Disconnect</button>
+
 </body>
 </html>
