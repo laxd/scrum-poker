@@ -29,11 +29,18 @@
 </select>
 <button type="button" onclick="submitVote();">Vote</button>
 
+<div id="currentIssue">
+
+</div>
+<label for="newIssue">New Issue:</label>
+<input id="newIssue"></input>
+<button type="button" onclick="submitIssue();">New Issue</button>
+
 <div id="votes">
 
 </div>
 
-<p id="response">
+<p id="users" style="float: right">
 
 </p>
 

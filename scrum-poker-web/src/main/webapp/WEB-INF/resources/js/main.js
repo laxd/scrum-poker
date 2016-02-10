@@ -13,7 +13,7 @@ $(document).ready(function(){
 var stomp = null;
 
 function addUser(user) {
-    $("#response").append("<p id='" + user.name +"'>" + user.name + "</p>");
+    $("#users").append("<p id='" + user.name +"'>" + user.name + "</p>");
 }
 
 function removeUser(user) {
@@ -33,9 +33,14 @@ function updateVotes(vote) {
     voteDiv.html("<p>" + vote.name + " voted " + vote.vote + "</p>");
 }
 
+function startIssue(issue) {
+    $("#votes").html("");
+    $("#currentIssue").html("<p>" + issue.name + "</p>");
+}
+
 /*
-    Stomp functions
-*/
+ * Stomp functions
+ */
 function connect() {
     var socket = new SockJS(context + "/stomp")
     stomp = Stomp.over(socket);
@@ -50,11 +55,16 @@ function connect() {
         stomp.subscribe("/topic/userDisconnect", function(message) {
             var user = JSON.parse(message.body);
             removeUser(user);
-        })
+        });
 
         stomp.subscribe("/topic/vote", function(message) {
             var vote = JSON.parse(message.body);
             updateVotes(vote);
+        });
+
+        stomp.subscribe("/topic/newIssue", function(message) {
+            var issue = JSON.parse(message.body);
+            startIssue(issue);
         })
     });
 
@@ -74,7 +84,7 @@ function disconnect() {
         stomp.disconnect();
     }
 
-    $("#response").html("");
+    $("#users").html("");
 }
 
 function submitVote() {
@@ -83,5 +93,12 @@ function submitVote() {
     stomp.send(context + "/vote", {}, JSON.stringify({
         'name': name,
         'vote': vote
+    }))
+}
+
+function submitIssue() {
+    var name = $("#newIssue").val();
+    stomp.send(context + "/newIssue", {}, JSON.stringify({
+        'name': name
     }))
 }
